@@ -1,9 +1,9 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
 
-from .models import User
 
-
-class UserAdmin(admin.ModelAdmin):
+class AlterUserAdmin(UserAdmin):
     """Класс для удобной работы в админке. Изменяет вид отображения
     комментариев. Добавляет поиск и возможность сортировки
     для модели Follow."""
@@ -14,4 +14,5 @@ class UserAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
-admin.site.register(User, UserAdmin)
+admin.site.unregister(User)
+admin.site.register(User, AlterUserAdmin)
