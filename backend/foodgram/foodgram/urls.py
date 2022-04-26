@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.urls import include, path
+from recipes import views as view_recipe
 from rest_framework.routers import DefaultRouter
 
-from recipes import views as view_recipe
 from users import views as view_user
 
 router = DefaultRouter()

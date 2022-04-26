@@ -1,10 +1,10 @@
-from drf_extra_fields.fields import Base64ImageField
 from django.contrib.auth import get_user_model
 from djoser.serializers import UserCreateSerializer, UserSerializer
+from drf_extra_fields.fields import Base64ImageField
+from recipes.models import Recipe
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
-from recipes.models import Recipe
 from .models import Follow
 
 User = get_user_model()
@@ -14,13 +14,13 @@ class CustomUserCreateSerializer(UserCreateSerializer):
     email = serializers.EmailField(
         validators=[
             UniqueValidator(queryset=User.objects.all())
-            ]
-        )
+        ]
+    )
     username = serializers.CharField(
         validators=[
             UniqueValidator(queryset=User.objects.all())
-            ]
-        )
+        ]
+    )
     first_name = serializers.CharField()
     last_name = serializers.CharField()
 
