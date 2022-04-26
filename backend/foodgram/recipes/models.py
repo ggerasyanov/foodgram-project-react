@@ -97,7 +97,7 @@ class Recipe(models.Model):
         default=1,
         verbose_name='Время приготовления в минутах',
         validators=[validators.MinValueValidator(
-                1, message='Минимальное время приготовления одна минута'
+            1, message='Минимальное время приготовления одна минута'
         ),
         ]
     )
@@ -163,7 +163,7 @@ class IngredientAmount(models.Model):
     amount = models.PositiveSmallIntegerField(
         default=1,
         validators=[validators.MinValueValidator(
-                1, message='Минимальное кол-во ингридиентов - 1'
+            1, message='Минимальное кол-во ингридиентов - 1'
         ),
         ],
         verbose_name='Количество',
@@ -176,7 +176,7 @@ class IngredientAmount(models.Model):
             models.UniqueConstraint(
                 fields=['recipe', 'ingredients'],
                 name='unique_ingredients_recipe'
-                )
+            )
         ]
 
     def __str__(self):

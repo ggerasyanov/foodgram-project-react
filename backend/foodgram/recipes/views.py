@@ -41,13 +41,13 @@ class RecipeViewSet(ModelViewSet):
         serializer.save(
             author=self.request.user
         )
-    
+
     def get_queryset(self):
         user = self.request.user
         queryset = Recipe.objects.all()
 
         if user.is_authenticated:
-            queryset = queryset.annotate(
+            return queryset.annotate(
                 is_favorited=Exists(
                     Favorite.objects.filter(
                         user=user,
@@ -62,7 +62,7 @@ class RecipeViewSet(ModelViewSet):
                 )
             )
         else:
-            queryset = queryset.annotate(
+            return queryset.annotate(
                 is_favorited=Value(
                     False,
                     output_field=BooleanField()
@@ -71,8 +71,6 @@ class RecipeViewSet(ModelViewSet):
                     False, output_field=BooleanField()
                 )
             )
-
-        return queryset
 
     @action(
         detail=True,

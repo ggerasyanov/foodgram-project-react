@@ -145,6 +145,3 @@ class RecipeWriteSerializer(serializers.ModelSerializer):
             instance,
             validated_data,
         )
-
-
-
