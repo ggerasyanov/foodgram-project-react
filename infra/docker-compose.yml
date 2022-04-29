@@ -9,7 +9,7 @@ services:
        - ./.env 
 
   backend:
-    image: avredin/foodgram_backend:latest
+    image: foodgram_backend:latest
     # build: ../backend
     restart: always
     volumes:
@@ -24,7 +24,7 @@ services:
 
   frontend:
     # build: ../frontend
-    image: avredin/foodgram_frontend:latest
+    image: foodgram_frontend:latest
     volumes:
       - ../frontend/:/app/result_build/
     depends_on:
