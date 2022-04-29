@@ -9,7 +9,7 @@ services:
        - ./.env 
 
   backend:
-    # build: ../frontend
+    # build: ../backend
     image: avredin/foodgram_backend:latest
     build: ../backend
     restart: always
