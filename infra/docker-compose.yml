@@ -9,9 +9,8 @@ services:
        - ./.env 
 
   backend:
-    # build: ../backend
     image: avredin/foodgram_backend:latest
-    build: ../backend
+    # build: ../backend
     restart: always
     volumes:
       - static_value:/app/static/
