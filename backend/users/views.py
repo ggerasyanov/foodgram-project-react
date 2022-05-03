@@ -6,7 +6,6 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 
 from users.models import Follow, User
-
 from .serializers import FollowSerializer
 
 
@@ -18,7 +17,8 @@ class FollowViewSet(UserViewSet):
     )
     def subscriptions(self, request):
         user = request.user
-        queryset = Follow.objects.filter(user=user)
+        get_user = User.objects.get(username=user)
+        queryset = get_user.follower.all()
         pages = self.paginate_queryset(queryset)
         serializer = FollowSerializer(
             pages,

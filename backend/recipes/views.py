@@ -61,16 +61,16 @@ class RecipeViewSet(ModelViewSet):
                     )
                 )
             )
-        else:
-            return queryset.annotate(
-                is_favorited=Value(
-                    False,
-                    output_field=BooleanField()
-                ),
-                in_in_shopping_cart=Value(
-                    False, output_field=BooleanField()
-                )
+
+        return queryset.annotate(
+            is_favorited=Value(
+                False,
+                output_field=BooleanField()
+            ),
+            in_in_shopping_cart=Value(
+                False, output_field=BooleanField()
             )
+        )
 
     @action(
         detail=True,

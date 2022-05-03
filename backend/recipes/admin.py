@@ -1,7 +1,6 @@
 from django.contrib.admin import ModelAdmin, TabularInline, register
 
 from users.models import Follow
-
 from . import models as recipe_model
 
 

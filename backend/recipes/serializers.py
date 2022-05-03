@@ -3,7 +3,6 @@ from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 
 from users.serializers import CustomUserSerializer
-
 from .models import Ingredient, IngredientAmount, Recipe, Tag
 
 
@@ -89,7 +88,7 @@ class RecipeWriteSerializer(serializers.ModelSerializer):
         ingredients = self.initial_data.get('ingredients')
         ingredients_set = set()
         for ingredient in ingredients:
-            if type(ingredient.get('amount')) == str:
+            if isinstance(ingredient.get('amount'), str):
                 if not ingredient.get('amount').isdigit():
                     raise serializers.ValidationError(
                         'Кол-во должно быть числом'
@@ -108,8 +107,8 @@ class RecipeWriteSerializer(serializers.ModelSerializer):
         return data
 
     def add_ingredients_tags(self, instance, **validated_data):
-        tags = validated_data['tags']
-        ingredients = validated_data['ingredients']
+        tags = validated_data.get('tags')
+        ingredients = validated_data.get('ingredients')
         for tag in tags:
             instance.tags.add(tag)
 
