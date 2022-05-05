@@ -6,17 +6,17 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      DB_NAME: ${DB_NAME}
-      DB_HOST: ${DB_HOST}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: postgres
+      DB_HOST: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     env_file:
       - .env
       # - ../backend/.env
 
   backend:
     # build: ../backend
-    image: avredin/foodgram_backend:latest
+    image: ggerasyanov/foodgram_backend:latest
     restart: always
     volumes:
       - static_value:/app/static/
@@ -31,7 +31,7 @@ services:
 
   frontend:
     # build: ../frontend
-    image: avredin/foodgram_frontend:latest
+    image: ggerasyanov/foodgram_frontend:latest
     volumes:
       - ../frontend/:/app/result_build/
     depends_on:
