@@ -29,7 +29,7 @@ class TagViewSet(ReadOnlyModelViewSet):
 
 class RecipeViewSet(ModelViewSet):
     queryset = Recipe.objects.all()
-    permission_classes = (AdminUserOrReadOnly)
+    permission_classes = (AdminUserOrReadOnly,)
     pagination_classes = LimitPageNumberPagination
 
     def get_serializer_class(self):
