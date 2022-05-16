@@ -7,11 +7,11 @@ from rest_framework.permissions import SAFE_METHODS, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
+from users.serializers import RecipesShortSerializer
 from . import filters, serializers
 from .models import Cart, Favorite, Ingredient, IngredientAmount, Recipe, Tag
 from .paginations import LimitPageNumberPagination
 from .permissions import AdminOrReadOnly, AdminUserOrReadOnly
-from users.serializers import RecipesShortSerializer
 
 
 class IngredientViewSet(ReadOnlyModelViewSet):
