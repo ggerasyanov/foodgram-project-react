@@ -20,12 +20,14 @@ class IngredientViewSet(ReadOnlyModelViewSet):
     permission_classes = (AdminOrReadOnly,)
     search_fields = ('^name',)
     filter_backends = (filters.IngredientSearchFilter,)
+    pagination_classes = None
 
 
 class TagViewSet(ReadOnlyModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = serializers.TagSerializer
     permission_classes = (AdminOrReadOnly,)
+    pagination_classes = None
 
 
 class RecipeViewSet(ModelViewSet):
