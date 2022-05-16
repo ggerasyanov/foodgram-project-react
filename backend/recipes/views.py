@@ -11,6 +11,7 @@ from . import filters, serializers
 from .models import Cart, Favorite, Ingredient, IngredientAmount, Recipe, Tag
 from .paginations import LimitPageNumberPagination
 from .permissions import AdminOrReadOnly, AdminUserOrReadOnly
+from users.serializers import RecipesShortSerializer
 
 
 class IngredientViewSet(ReadOnlyModelViewSet):
@@ -109,7 +110,7 @@ class RecipeViewSet(ModelViewSet):
             )
         recipe = get_object_or_404(Recipe, id=pk)
         model.objects.create(recipe=recipe, user=user)
-        serializer = serializers.RecipesShortSerializer(recipe)
+        serializer = RecipesShortSerializer(recipe)
         return Response(
             serializer.data,
             status=status.HTTP_201_CREATED,
