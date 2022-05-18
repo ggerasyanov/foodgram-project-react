@@ -116,6 +116,6 @@ class FollowSerializer(serializers.ModelSerializer):
             queryset = queryset[:int(limit)]
         return RecipesShortSerializer(queryset, many=True).data
 
-    def get_recipe_count(self, obj):
+    def get_recipes_count(self, obj):
         get_author = User.objects.get(username=obj.author)
         return get_author.recipes.all().count()
