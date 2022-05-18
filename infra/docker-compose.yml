@@ -11,12 +11,12 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     env_file:
-      - .env
-      # - ../backend/.env
+      # - .env
+      - ../backend/.env
 
   backend:
-    # build: ../backend
-    image: ggerasyanov/foodgram_backend:latest
+    build: ../backend
+    # image: ggerasyanov/foodgram_backend:latest
     restart: always
     volumes:
       - static_value:/app/static/
@@ -26,12 +26,12 @@ services:
     depends_on:
       - db
     env_file:
-      - .env
-      # - ../backend/.env
+      # - .env
+      - ../backend/.env
 
   frontend:
-    # build: ../frontend
-    image: ggerasyanov/foodgram_frontend:latest
+    build: ../frontend
+    # image: ggerasyanov/foodgram_frontend:latest
     volumes:
       - ../frontend/:/app/result_build/
     depends_on:

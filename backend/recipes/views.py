@@ -20,20 +20,21 @@ class IngredientViewSet(ReadOnlyModelViewSet):
     permission_classes = (AdminOrReadOnly,)
     search_fields = ('^name',)
     filter_backends = (filters.IngredientSearchFilter,)
-    pagination_classes = None
+    pagination_class = None
 
 
 class TagViewSet(ReadOnlyModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = serializers.TagSerializer
     permission_classes = (AdminOrReadOnly,)
-    pagination_classes = None
+    pagination_class = None
 
 
 class RecipeViewSet(ModelViewSet):
     queryset = Recipe.objects.all()
     permission_classes = (AdminUserOrReadOnly,)
     pagination_classes = LimitPageNumberPagination
+    filter_class = filters.TagFavoritShopingFilter
 
     def get_serializer_class(self):
         if self.request.method in SAFE_METHODS:
@@ -57,7 +58,7 @@ class RecipeViewSet(ModelViewSet):
                         recipe__pk=OuterRef('pk')
                     )
                 ),
-                is_in_shooping_cart=Exists(
+                is_in_shopping_cart=Exists(
                     Cart.objects.filter(
                         user=user,
                         recipe__pk=OuterRef('pk')
@@ -138,7 +139,7 @@ class RecipeViewSet(ModelViewSet):
         permission_classes=(IsAuthenticated,),
     )
     def download_shopping_cart(self, request):
-        recipe = request.user.cart.all().value('recipe_id')
+        recipe = request.user.cart.all().values('recipe_id')
         ingredients = IngredientAmount.objects.filter(
             recipe__id__in=recipe
         )

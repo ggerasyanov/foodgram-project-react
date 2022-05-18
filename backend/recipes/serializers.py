@@ -62,7 +62,7 @@ class RecipesReadSerializer(serializers.ModelSerializer):
 
 class RecipeWriteSerializer(serializers.ModelSerializer):
     image = Base64ImageField()
-    tags = TagSerializer()
+    tags = TagSerializer(many=True, read_only=True)
     ingredients = serializers.SerializerMethodField()
 
     class Meta:
@@ -70,7 +70,7 @@ class RecipeWriteSerializer(serializers.ModelSerializer):
         fields = (
             'ingredients',
             'tags',
-            'imgae',
+            'image',
             'name',
             'text',
             'cooking_time',
