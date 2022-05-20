@@ -32,7 +32,7 @@ DEBUG=False
 
 ```
 # Запускать в папке с файлом docker-compose.yml
-docker-compose up # в обычном режиме
+docker-compose up #
 docker-compose up -d # в фоновом режиме
 ```
 
