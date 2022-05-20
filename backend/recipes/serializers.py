@@ -91,7 +91,7 @@ class RecipeWriteSerializer(serializers.ModelSerializer):
             if isinstance(ingredient.get('amount'), str):
                 if not ingredient.get('amount').isdigit():
                     raise serializers.ValidationError(
-                        'Кол-во должно быть числом'
+                        'Кол-во должно быть положительным числом'
                     )
             if int(ingredient.get('amount')) <= 0:
                 raise serializers.ValidationError(
